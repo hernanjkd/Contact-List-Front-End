@@ -33,35 +33,33 @@ export default class AddContact extends React.Component {
 							<label>Address</label>
 							<input name="address" type="text" className="form-control" placeholder="Enter address" />
 						</div>
+						<div className="form-group">
+							<label className="pr-2">Gender</label>
+							<select name="gender" value="F">
+								<option value="F">F</option>
+								<option value="M">M</option>
+							</select>
+						</div>
 						<Context.Consumer>
 							{({ store, actions }) => {
 								return (
-									<div>
-										<button
-											type="button"
-											className="btn btn-primary form-control"
-											onClick={() => {
-												let fullname = document.querySelector("[name=fullname]").value.trim();
-												let email = document.querySelector("[name=email]").value.trim();
-												let phone = document.querySelector("[name=phone]").value.trim();
-												let address = document.querySelector("[name=address]").value.trim();
-												if (phone === "") phone = null;
-												if (address === "") address = null;
-												actions.addContact(fullname, email, phone, address);
-												this.setState({ status: "Contact Sent" });
-												document.querySelector("form").reset();
-											}}>
-											POST
-										</button>
-										<button
-											type="button"
-											className="btn btn-secondary form-control"
-											onClick={() => {
-												actions.getContact();
-											}}>
-											GET
-										</button>
-									</div>
+									<button
+										type="button"
+										className="btn btn-primary form-control"
+										onClick={() => {
+											let fullname = document.querySelector("[name=fullname]").value.trim();
+											let email = document.querySelector("[name=email]").value.trim();
+											let phone = document.querySelector("[name=phone]").value.trim();
+											let address = document.querySelector("[name=address]").value.trim();
+											let gender = document.querySelector("[name=gender]").value;
+											if (phone === "") phone = null;
+											if (address === "") address = null;
+											actions.addContact(fullname, email, phone, address, gender);
+											this.setState({ status: "Contact Sent" });
+											document.querySelector("form").reset();
+										}}>
+										POST
+									</button>
 								);
 							}}
 						</Context.Consumer>

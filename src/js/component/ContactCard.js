@@ -3,8 +3,8 @@ import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 
 class ContactCard extends React.Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 		this.state = {
 			// initialize your state
 		};
@@ -16,8 +16,8 @@ class ContactCard extends React.Component {
 				<div className="row w-100">
 					<div className="col-12 col-sm-6 col-md-3 px-0">
 						<img
-							src="http://demos.themes.guide/bodeo/assets/images/users/m101.jpg"
-							alt="Mike Anamendolla"
+							src={this.props.image_url}
+							alt={this.props.fullname}
 							className="rounded-circle mx-auto d-block img-fluid"
 						/>
 					</div>
@@ -30,10 +30,10 @@ class ContactCard extends React.Component {
 								<i className="fas fa-trash-alt" />
 							</button>
 						</div>
-						<label className="name lead">Mike Anamendolla</label>
+						<label className="name lead">{this.props.fullname}</label>
 						<br />
 						<i className="fas fa-map-marker-alt text-muted mr-3" />
-						<span className="text-muted">5842 Hillcrest Rd</span>
+						<span className="text-muted">{this.props.address}</span>
 						<br />
 						<span
 							className="fa fa-phone fa-fw text-muted mr-3"
@@ -41,7 +41,7 @@ class ContactCard extends React.Component {
 							title=""
 							data-original-title="(870) 288-4149"
 						/>
-						<span className="text-muted small">(870) 288-4149</span>
+						<span className="text-muted small">{this.props.phone}</span>
 						<br />
 						<span
 							className="fa fa-envelope fa-fw text-muted mr-3"
@@ -49,7 +49,7 @@ class ContactCard extends React.Component {
 							data-original-title=""
 							title=""
 						/>
-						<span className="text-muted small text-truncate">mike.ana@example.com</span>
+						<span className="text-muted small text-truncate">{this.props.email}</span>
 					</div>
 				</div>
 			</li>
@@ -62,6 +62,11 @@ class ContactCard extends React.Component {
  * your component's properties
  **/
 ContactCard.propTypes = {
+	fullname: PropTypes.string,
+	email: PropTypes.string,
+	phone: PropTypes.string,
+	address: PropTypes.string,
+	image_url: PropTypes.string,
 	history: PropTypes.object,
 	onDelete: PropTypes.func
 };

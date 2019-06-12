@@ -25,7 +25,7 @@ export default class Contacts extends React.Component {
 					<div id="contacts" className="panel-collapse collapse show" aria-expanded="true">
 						<ul className="list-group pull-down" id="contact-list">
 							<Context.Consumer>
-								{({ store }) => {
+								{({ store, actions }) => {
 									return store.contactList.map((item, index) => {
 										return (
 											<ContactCard
@@ -35,7 +35,7 @@ export default class Contacts extends React.Component {
 												phone={item.phone}
 												address={item.address}
 												image_url={item.image_url}
-												onDelete={() => this.setState({ showModal: true })}
+												onDelete={() => actions.deleteContact(item.id)}
 											/>
 										);
 									});

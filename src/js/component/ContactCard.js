@@ -1,15 +1,8 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 class ContactCard extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			// initialize your state
-		};
-	}
-
 	render() {
 		return (
 			<li className="list-group-item">
@@ -26,9 +19,11 @@ class ContactCard extends React.Component {
 							<button className="btn">
 								<i className="fas fa-pencil-alt mr-3" />
 							</button>
-							<button className="btn" onClick={() => this.props.onDelete()}>
-								<i className="fas fa-trash-alt" />
-							</button>
+							<Link to="/">
+								<button className="btn" onClick={() => this.props.onDelete()}>
+									<i className="fas fa-trash-alt" />
+								</button>
+							</Link>
 						</div>
 						<label className="name lead">{this.props.fullname}</label>
 						<br />

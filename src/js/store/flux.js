@@ -18,40 +18,50 @@ const getState = ({ getStore, setStore }) => {
 						phone: phone,
 						address: address
 					})
+				}).then(() => {
+					fetch(url)
+						.then(response => response.json())
+						.then(updatedData => {
+							setStore({ contactList: updatedData });
+						});
 				});
 			},
 
-			getContact: () => {
-				const store = getStore();
+			updateContact: (id, fullname, email, phone, address) => {
+				const url = "https://3000-cc2270b7-3663-47df-8934-859f16490208.ws-us0.gitpod.io/person/";
 
-				const url = "https://3000-cc2270b7-3663-47df-8934-859f16490208.ws-us0.gitpod.io/person";
-
-				// fetch the url and get the response back
-				fetch(url, {
-					method: "GET",
+				fetch(url + id, {
+					method: "PUT",
 					headers: {
 						"Content-Type": "application/json"
+					},
+					body: {
+						fullname: fullname,
+						email: email,
+						phone: phone,
+						address: address
 					}
-				})
-					// first must check if the fetch was able to reach the data successfully..
-					// if it was, turn it into JSON
-					.then(response => {
-						// one of the response properties that renders true if successful
-						if (response.status >= 400 && response.status !== 404) {
-							throw Error(Response.status + ": " + Response.statusText);
-						}
-						return response.json();
-					})
+				}).then(() => {
+					fetch(url)
+						.then(response => response.json())
+						.then(updatedData => {
+							setStore({ contactList: updatedData });
+						});
+				});
+			},
 
-					// use the fetched data that's in JSON format
-					.then(data => {
-						setStore({ contactList: data });
-					})
+			deleteContact: id => {
+				const url = "https://3000-cc2270b7-3663-47df-8934-859f16490208.ws-us0.gitpod.io/person/";
 
-					// If there was an error fetching the data, catch it here
-					.catch(error => {
-						console.log("Looks like there was a problem: \n", error);
-					});
+				fetch(url + id, {
+					method: "DELETE"
+				}).then(() => {
+					fetch(url)
+						.then(response => response.json())
+						.then(updatedData => {
+							setStore({ contactList: updatedData });
+						});
+				});
 			}
 		}
 	};

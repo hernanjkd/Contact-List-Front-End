@@ -43,25 +43,23 @@ export default class AddContact extends React.Component {
 						<Context.Consumer>
 							{({ store, actions }) => {
 								return (
-									<Link to="/">
-										<button
-											type="button"
-											className="btn btn-primary form-control"
-											onClick={() => {
-												let fullname = document.querySelector("[name=fullname]").value.trim();
-												let email = document.querySelector("[name=email]").value.trim();
-												let phone = document.querySelector("[name=phone]").value.trim();
-												let address = document.querySelector("[name=address]").value.trim();
-												let gender = document.querySelector("[name=gender]").value;
-												if (phone === "") phone = null;
-												if (address === "") address = null;
-												actions.addContact(fullname, email, phone, address, gender);
-												this.setState({ status: "Contact Sent" });
-												document.querySelector("form").reset();
-											}}>
-											POST
-										</button>
-									</Link>
+									<button
+										type="button"
+										className="btn btn-primary form-control"
+										onClick={() => {
+											let fullname = document.querySelector("[name=fullname]").value.trim();
+											let email = document.querySelector("[name=email]").value.trim();
+											let phone = document.querySelector("[name=phone]").value.trim();
+											let address = document.querySelector("[name=address]").value.trim();
+											let gender = document.querySelector("[name=gender]").value;
+											if (phone === "") phone = null;
+											if (address === "") address = null;
+											actions.addContact(fullname, email, phone, address, gender, this.props);
+											this.setState({ status: "Contact Sent" });
+											document.querySelector("form").reset();
+										}}>
+										POST
+									</button>
 								);
 							}}
 						</Context.Consumer>

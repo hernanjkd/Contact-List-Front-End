@@ -28,7 +28,7 @@ const injectContext = PassedComponent => {
 				.then(response => response.json())
 				.then(data => {
 					let { store } = this.state;
-					store.contactList = data;
+					store.contactList = data.reverse();
 					this.setState({ store });
 				});
 		}
